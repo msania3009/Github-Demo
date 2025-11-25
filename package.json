@@ -1,0 +1,11 @@
+{
+  "name": "ci-demo-app",
+  "version": "1.0.0",
+  "description": "A demo for GitHub Actions CI",
+  "scripts": {
+    "build": "echo 'Build successful!'",
+    "test": "echo 'All tests passed!' && exit 0"
+  },
+  "author": "",
+  "license": "ISC"
+}
