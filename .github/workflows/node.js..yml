@@ -1,0 +1,39 @@
+name: Node.js CI
+
+# 1. Triggers: Define when the workflow runs
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+# 2. Jobs: Define the tasks to be performed
+jobs:
+  build_and_test:
+    # Use the latest stable Ubuntu runner environment
+    runs-on: ubuntu-latest
+    
+    # 3. Strategy: Test on different Node.js versions
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+
+    # 4. Steps: The actual actions in the job
+    steps:
+    - name: Checkout Code
+      # Uses a pre-built action to pull the code from the repo
+      uses: actions/checkout@v4
+      
+    - name: Set up Node.js ${{ matrix.node-version }}
+      # Uses a pre-built action to install the specific Node.js version
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        
+    - name: Run Build Command
+      # Executes the 'npm run build' script defined in package.json
+      run: npm run build
+      
+    - name: Run Test Command
+      # Executes the 'npm run test' script defined in package.json
+      run: npm run test
